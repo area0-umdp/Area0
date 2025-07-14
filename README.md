@@ -17,6 +17,15 @@
 - 🔽 Direct downloader with sniffing + reverse engineering
 ---
 
+## 🐞 Known Issues
+
+Some private/paid content may fail if anti-bot measures are used (WAF, CAPTCHA).
+
+Platform-specific downloaders (e.g., TikTok, adult) may require API cookies or tokens.
+
+Telegram bot integration is present but not yet fully documented.
+
+
 ## 📦 Required Libraries
 
 Install these before running `Area0`:
