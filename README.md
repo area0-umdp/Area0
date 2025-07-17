@@ -5,6 +5,9 @@
 **Area0** is a powerful, modular, terminal-based downloader that rips media from public, private, and paid sources using advanced extraction tools like `yt-dlp`, `aria2`, and direct sniffing. Designed for hackers, devs, and rebels who want complete control over their media. Don't mind about MIT License. This is only want to show you all that the program is freely to contribute. Currently there is a lot of error so help us to improve Area 0.
 
 ---
+## 🧩 Use Source
+`yt-dlp` https://github.com/yt-dlp/yt-dlp
+`aria2` https://github.com/aria2/aria2
 
 ## 🔥 Features
 
