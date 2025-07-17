@@ -6,13 +6,15 @@
 
 ---
 ## 🧩 Use Source
+
 `yt-dlp` https://github.com/yt-dlp/yt-dlp
 `aria2` https://github.com/aria2/aria2
+`FFmpeg` https://github.com/FFmpeg/FFmpeg
 
 ## 🔥 Features
 
 - 📹 Universal support – YouTube, TikTok, X, adult sites, and more
-- ⚙️ Uses `yt-dlp`, `aria2`, `ffmpeg` for powerful downloads
+- ⚙️ Uses `yt-dlp`, `aria2`, `FFmpeg` for powerful downloads
 - 🧠 Clipboard & URL extractor (auto-detect)
 - 🔒 No server-side storage (privacy first)
 - 🪄 Termux & Android-friendly
