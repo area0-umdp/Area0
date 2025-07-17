@@ -1,0 +1,699 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Area0 -Universal Media Downloader Program</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+   rel="stylesheet"
+  />
+  <link
+   href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;500;700&display=swap"
+   rel="stylesheet"
+  />
+  <style>
+   :root {
+    --primary: #66d9ef;
+    --secondary: #a6e22e;
+    --accent: #f92672;
+    --bg-dark: #0f111a;
+    --bg-card: #1e1e2f;
+    --text-primary: #f8f8f2;
+    --text-secondary: #7f8caa;
+   }
+   
+   body {
+    font-family: "Inter", sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
+   }
+   
+   code, .code-font {
+    font-family: "Fira Code", monospace;
+   }
+   
+   main {
+    flex-grow: 1;
+    padding-top: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding-bottom: 3rem;
+   }
+   
+   /* Typography */
+   h2.section-title {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: var(--primary);
+    text-align: center;
+    width: 100%;
+   }
+   
+   h2.section-title::after {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 3px;
+   }
+   
+   /* Cards */
+   .feature-card {
+    background: var(--bg-card);
+    border-radius: 1.75rem;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: var(--text-primary);
+    border: 1px solid rgba(102, 217, 239, 0.1);
+    position: relative;
+    overflow: hidden;
+   }
+   
+   .feature-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(102, 217, 239, 0.1) 0%, rgba(102, 217, 239, 0) 70%);
+    transform: scale(0);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+   }
+   
+   .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(102, 217, 239, 0.2);
+    border-color: rgba(102, 217, 239, 0.3);
+   }
+   
+   .feature-card:hover::before {
+    transform: scale(1);
+   }
+   
+   .feature-card:active {
+    transform: translateY(-5px);
+   }
+   
+   .feature-icon {
+    color: var(--secondary);
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 2px 8px rgba(166, 226, 46, 0.4));
+    transition: transform 0.3s ease;
+   }
+   
+   .feature-card:hover .feature-icon {
+    transform: scale(1.1);
+   }
+   
+   h3.feature-title {
+    font-weight: 700;
+    font-size: 1.375rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+    position: relative;
+    padding-bottom: 0.5rem;
+   }
+   
+   h3.feature-title::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 2px;
+    background: var(--accent);
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.5;
+   }
+   
+   p.feature-desc {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 320px;
+    user-select: text;
+   }
+   
+   /* Hero Section */
+   .hero-section {
+    background: linear-gradient(135deg, #1e1e2f 0%, #25253a 100%);
+    border-radius: 2.5rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    padding: 4rem 3rem;
+    margin-bottom: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: var(--text-primary);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(102, 217, 239, 0.1);
+   }
+   
+   .hero-section::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(102, 217, 239, 0.05) 0%, rgba(102, 217, 239, 0) 70%);
+    pointer-events: none;
+   }
+   
+   @media (min-width: 768px) {
+    .hero-section {
+     flex-direction: row;
+     text-align: left;
+     padding: 5rem 4rem;
+    }
+   }
+   
+   .hero-content {
+    flex: 1;
+    position: relative;
+    z-index: 2;
+   }
+   
+   .hero-title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--primary);
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 10px rgba(102, 217, 239, 0.3);
+   }
+   
+   .hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+    max-width: 520px;
+    user-select: text;
+    line-height: 1.6;
+   }
+   
+   .btn-primary {
+    background: linear-gradient(90deg, var(--secondary) 0%, var(--primary) 100%);
+    color: #1e1e2f;
+    font-weight: 700;
+    padding: 1rem 2.5rem;
+    border-radius: 9999px;
+    box-shadow: 0 8px 25px rgba(166, 226, 46, 0.5);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    user-select: none;
+    text-decoration: none;
+    font-size: 1.125rem;
+    letter-spacing: 0.02em;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+   }
+   
+   .btn-primary::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+   }
+   
+   .btn-primary:hover::before {
+    opacity: 1;
+   }
+   
+   .btn-primary span {
+    position: relative;
+    z-index: 2;
+   }
+   
+   .btn-primary:hover {
+    box-shadow: 0 10px 30px rgba(102, 217, 239, 0.7);
+    transform: translateY(-2px);
+   }
+   
+   .btn-primary:active {
+    transform: translateY(0);
+   }
+   
+   .hero-image {
+    flex: 1;
+    max-width: 600px;
+    margin-top: 2.5rem;
+    border-radius: 2rem;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s ease;
+    position: relative;
+    z-index: 2;
+   }
+   
+   @media (min-width: 768px) {
+    .hero-image {
+     margin-top: 0;
+     margin-left: 2rem;
+    }
+   }
+   
+   .hero-image:hover {
+    transform: scale(1.03) rotate(-1deg);
+   }
+   
+   .hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2rem;
+    filter: drop-shadow(0 0 15px rgba(102, 217, 239, 0.4));
+   }
+   
+   /* Footer */
+   footer {
+    background: var(--bg-card);
+    border-top: 1px solid rgba(58, 58, 90, 0.5);
+    padding: 2rem 1rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+   }
+   
+   footer a {
+    color: var(--primary);
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+   }
+   
+   footer a:hover {
+    color: var(--secondary);
+    transform: translateY(-3px);
+    background: rgba(102, 217, 239, 0.1);
+   }
+   
+   /* Floating particles */
+   .particle {
+    position: absolute;
+    background: rgba(102, 217, 239, 0.3);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+   }
+   
+   /* Installation code block */
+   .install-code {
+    background: #1a1b26;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin: 3rem auto;
+    max-width: 800px;
+    border: 1px solid rgba(102, 217, 239, 0.2);
+    position: relative;
+    overflow: hidden;
+   }
+   
+   .install-code::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--primary), var(--secondary));
+   }
+   
+   .install-code pre {
+    margin: 0;
+    font-family: "Fira Code", monospace;
+    color: var(--text-primary);
+    overflow-x: auto;
+    padding-right: 1rem;
+   }
+   
+   .install-code code {
+    display: block;
+    white-space: pre;
+   }
+   
+   .copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: rgba(102, 217, 239, 0.1);
+    border: none;
+    color: var(--primary);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.8rem;
+    font-family: "Fira Code", monospace;
+   }
+   
+   .copy-btn:hover {
+    background: rgba(102, 217, 239, 0.2);
+   }
+   
+   /* Scroll indicator */
+   .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-secondary);
+    opacity: 0.8;
+    animation: bounce 2s infinite;
+   }
+   
+   .scroll-hint span {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+   }
+   
+   @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+     transform: translateY(0) translateX(-50%);
+    }
+    40% {
+     transform: translateY(-10px) translateX(-50%);
+    }
+    60% {
+     transform: translateY(-5px) translateX(-50%);
+    }
+   }
+   
+   /* Responsive adjustments */
+   @media (max-width: 768px) {
+    .hero-title {
+     font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+     font-size: 1.1rem;
+    }
+    
+    h2.section-title {
+     font-size: 2rem;
+    }
+   }
+  </style>
+</head>
+<body>
+  <main>
+   <!-- Hero Section -->
+   <section class="hero-section" role="banner" aria-label="Hero section">
+    <div class="hero-content">
+     <h1 class="hero-title">Area0 - Media Downloader Program</h1>
+     <p class="hero-subtitle">
+      A powerful Termux library to download every media content from the internet effortlessly. Lightweight, fast, and secure.
+     </p>
+     <div class="flex flex-wrap gap-4">
+      <a href="#installation" class="btn-primary" role="button" tabindex="0">
+       <span>Install Now</span>
+       <i class="fas fa-arrow-down"></i>
+      </a>
+      <a href="#features" class="btn-primary" role="button" tabindex="0" style="background: var(--bg-card); color: var(--primary); box-shadow: 0 8px 25px rgba(102, 217, 239, 0.2);">
+       <span>Area0's Features</span>
+       <i class="fas fa-search"></i>
+      </a>
+     </div>
+    </div>
+    <div class="hero-image" aria-hidden="true">
+     <img
+      src="https://storage.googleapis.com/a1aa/image/53277269-36ec-4643-c3a0-e9ec2e93c1b5.jpg"
+      alt="Illustration of a mobile terminal with media icons like video, music, and images flowing into a download folder"
+      loading="lazy"
+      width="600"
+      height="400"
+     />
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+     <span>Scroll down</span>
+     <i class="fas fa-chevron-down"></i>
+    </div>
+   </section>
+   
+   <!-- Installation Section -->
+   <section id="installation" aria-label="Installation" class="mb-20 px-4">
+    <h2 class="section-title">Quick Installation</h2>
+    <div class="install-code">
+     <button class="copy-btn" onclick="copyInstallCode()">
+      <i class="fas fa-copy"></i> Copy
+     </button>
+     <pre><code class="code-font"># Install Area0 in Termux
+pkg install python -y
+pip install area0 --upgrade
+
+# Basic usage example
+area0 --url "https://example.com/video" --output ~/downloads</code></pre>
+    </div>
+   </section>
+
+   <!-- Features Section -->
+   <section id="features" aria-label="Features" class="mb-20 px-4">
+    <h2 class="section-title">Why Choose Area0?</h2>
+    <div
+     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 justify-center"
+    >
+     <article
+      class="feature-card"
+      tabindex="0"
+      role="region"
+      aria-labelledby="feature1-title"
+      aria-describedby="feature1-desc"
+     >
+      <div class="feature-icon" aria-hidden="true"><i class="fas fa-download"></i></div>
+      <h3 id="feature1-title" class="feature-title">Universal Media Support</h3>
+      <p id="feature1-desc" class="feature-desc">
+       Download videos, music, images, and documents from virtually any website or platform with a single command.
+      </p>
+     </article>
+     <article
+      class="feature-card"
+      tabindex="0"
+      role="region"
+      aria-labelledby="feature2-title"
+      aria-describedby="feature2-desc"
+     >
+      <div class="feature-icon" aria-hidden="true"><i class="fas fa-mobile-alt"></i></div>
+      <h3 id="feature2-title" class="feature-title">Optimized for Mobile</h3>
+      <p id="feature2-desc" class="feature-desc">
+       Designed specifically for Termux on Android with minimal resource usage and battery impact.
+      </p>
+     </article>
+     <article
+      class="feature-card"
+      tabindex="0"
+      role="region"
+      aria-labelledby="feature3-title"
+      aria-describedby="feature3-desc"
+     >
+      <div class="feature-icon" aria-hidden="true"><i class="fas fa-code"></i></div>
+      <h3 id="feature3-title" class="feature-title">Developer Friendly</h3>
+      <p id="feature3-desc" class="feature-desc">
+       Clean API for easy integration with your Termux scripts and automation workflows.
+      </p>
+     </article>
+     <article
+      class="feature-card"
+      tabindex="0"
+      role="region"
+      aria-labelledby="feature4-title"
+      aria-describedby="feature4-desc"
+     >
+      <div class="feature-icon" aria-hidden="true"><i class="fas fa-tachometer-alt"></i></div>
+      <h3 id="feature4-title" class="feature-title">High Performance</h3>
+      <p id="feature4-desc" class="feature-desc">
+       Multi-threaded downloads with resume support and intelligent bandwidth management.
+      </p>
+     </article>
+     <article
+      class="feature-card"
+      tabindex="0"
+      role="region"
+      aria-labelledby="feature5-title"
+      aria-describedby="feature5-desc"
+     >
+      <div class="feature-icon" aria-hidden="true"><i class="fas fa-shield-alt"></i></div>
+      <h3 id="feature5-title" class="feature-title">Privacy Focused</h3>
+      <p id="feature5-desc" class="feature-desc">
+       No telemetry, no ads, and no data collection. Your downloads stay private.
+      </p>
+     </article>
+     <article
+      class="feature-card"
+      tabindex="0"
+      role="region"
+      aria-labelledby="feature6-title"
+      aria-describedby="feature6-desc"
+     >
+      <div class="feature-icon" aria-hidden="true"><i class="fas fa-heart"></i></div>
+      <h3 id="feature6-title" class="feature-title">Community Driven</h3>
+      <p id="feature6-desc" class="feature-desc">
+       Regular updates with new features based on user feedback and contributions.
+      </p>
+     </article>
+    </div>
+   </section>
+   
+   <!-- Advanced Features Section -->
+   <section id="advanced" aria-label="Advanced Features" class="mb-20 px-4">
+    <h2 class="section-title">Advanced Capabilities</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+     <div class="feature-card h-full">
+      <div class="feature-icon" aria-hidden="true"><i class="fas fa-sliders-h"></i></div>
+      <h3 class="feature-title">Customizable Download Options</h3>
+      <p class="feature-desc">
+       Fine-tune your downloads with quality selection, format conversion, metadata editing, and batch processing capabilities.
+      </p>
+     </div>
+     <div class="feature-card h-full">
+      <div class="feature-icon" aria-hidden="true"><i class="fas fa-plug"></i></div>
+      <h3 class="feature-title">Extensible Plugin System</h3>
+      <p class="feature-desc">
+       Extend functionality with community plugins for specialized sites and advanced features like subtitle downloads.
+      </p>
+     </div>
+    </div>
+   </section>
+  </main>
+  <footer class="bg-gray-900 text-white p-4 flex flex-col md:flex-row items-center justify-between">
+  <span class="text-sm">© 2025 Area0. All rights reserved.</span>
+  <nav aria-label="Social media links" class="flex space-x-4 mt-2 md:mt-0">
+    <a href="https://github.com/area0-umdp" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       aria-label="GitHub" 
+       class="hover:text-green-400 transition" 
+       title="GitHub">
+      <i class="fab fa-github text-xl" aria-hidden="true"></i>
+    </a>
+    <a href="https://discord.com/invite/your-link" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       aria-label="Discord" 
+       class="hover:text-green-400 transition" 
+       title="Discord">
+      <i class="fab fa-telegram text-xl" aria-hidden="true"></i>
+    </a>
+  </nav>
+</footer>
+  
+  <script>
+   // Create floating particles
+   function createParticles() {
+    const colors = ['rgba(102, 217, 239, 0.3)', 'rgba(166, 226, 46, 0.3)', 'rgba(249, 38, 114, 0.3)'];
+    
+    for (let i = 0; i < 15; i++) {
+     const particle = document.createElement('div');
+     particle.classList.add('particle');
+     
+     // Random properties
+     const size = Math.random() * 10 + 5;
+     const posX = Math.random() * 100;
+     const posY = Math.random() * 100;
+     const color = colors[Math.floor(Math.random() * colors.length)];
+     const duration = Math.random() * 20 + 10;
+     const delay = Math.random() * 5;
+     
+     particle.style.width = `${size}px`;
+     particle.style.height = `${size}px`;
+     particle.style.left = `${posX}%`;
+     particle.style.top = `${posY}%`;
+     particle.style.background = color;
+     particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+     
+     document.body.appendChild(particle);
+    }
+   }
+   
+   // Copy installation code
+   function copyInstallCode() {
+    const code = document.querySelector('.install-code code').textContent;
+    navigator.clipboard.writeText(code).then(() => {
+     const btn = document.querySelector('.copy-btn');
+     btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+     setTimeout(() => {
+      btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+     }, 2000);
+    });
+   }
+   
+   // Initialize when DOM is loaded
+   document.addEventListener('DOMContentLoaded', () => {
+    createParticles();
+    
+    // Add animation to hero title
+    const heroTitle = document.querySelector('.hero-title');
+    heroTitle.style.opacity = '0';
+    heroTitle.style.transform = 'translateY(20px)';
+    heroTitle.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    
+    setTimeout(() => {
+     heroTitle.style.opacity = '1';
+     heroTitle.style.transform = 'translateY(0)';
+    }, 300);
+    
+    // Animate feature cards sequentially
+    const cards = document.querySelectorAll('.feature-card');
+    cards.forEach((card, index) => {
+     card.style.opacity = '0';
+     card.style.transform = 'translateY(20px)';
+     card.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+     
+     setTimeout(() => {
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+     }, 500 + (index * 100));
+    });
+   });
+  </script>
+</body>
+</html>
